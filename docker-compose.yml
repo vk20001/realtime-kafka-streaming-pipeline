@@ -1,0 +1,84 @@
+version: '3.8'
+
+services:
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:7.3.2
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+
+  kafka:
+    image: confluentinc/cp-kafka:7.3.2
+    depends_on:
+      - zookeeper
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: turbine_user
+      POSTGRES_PASSWORD: turbine_pass
+      POSTGRES_DB: turbine_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  producer:
+    build: ./producer
+    depends_on:
+      - kafka
+    environment:
+      - KAFKA_BROKER=kafka:9092
+      - KAFKA_TOPIC=turbine-data
+
+  consumer:
+    build: ./consumer
+    depends_on:
+      - kafka
+      - postgres
+    volumes:
+      - ./consumer:/app
+      - ./scripts:/scripts  
+    environment:
+      - KAFKA_BROKER=kafka:9092
+      - KAFKA_TOPIC=turbine-data
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=turbine_db
+      - POSTGRES_USER=turbine_user
+      - POSTGRES_PASSWORD=turbine_pass
+    entrypoint: ["/scripts/wait-for-it.sh", "kafka:9092", "--timeout=30", "--strict", "--", "python", "stream_consumer.py"]
+    ports:
+      - "8080:8080"
+
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+    command:
+      - "--config.file=/etc/prometheus/prometheus.yml"
+
+  grafana:
+    image: grafana/grafana
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-storage:/var/lib/grafana
+
+volumes:
+  pgdata:
+  grafana-storage:
+

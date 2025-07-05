@@ -1,0 +1,9 @@
+kafka-python
+pandera
+pandas
+sqlalchemy
+psycopg2-binary
+python-dotenv
+prometheus_client
+pytest 
+flake8
