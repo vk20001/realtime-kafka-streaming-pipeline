@@ -53,3 +53,4 @@ def test_generator_produces_all_fields(mock_get_producer: MagicMock) -> None:
     assert isinstance(sample["turbine_id"], str)
     assert isinstance(sample["wind_speed"], float)
     assert sample["wind_speed"] >= 0
+    
