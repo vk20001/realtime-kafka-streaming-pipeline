@@ -21,7 +21,7 @@ os.makedirs("logs", exist_ok=True)
 logging.basicConfig(
     filename="logs/consumer.log",
     level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s"
+    format="%(asctime)s - %(levelname)s - %(message)s",
 )
 
 # === Environment Variables ===
@@ -39,16 +39,22 @@ DB_URL = f"postgresql://{DB_USER}:{DB_PASSWORD}@{DB_HOST}:{DB_PORT}/{DB_NAME}"
 engine = create_engine(DB_URL)
 
 # === Prometheus Metrics ===
-start_http_server(8000, addr="0.0.0.0")  # Exposes metrics on http://localhost:8000/metrics
-messages_processed = Counter("turbine_messages_valid", "Number of valid messages processed")
+start_http_server(
+    8000, addr="0.0.0.0"
+)  # Exposes metrics on http://localhost:8000/metrics
+messages_processed = Counter(
+    "turbine_messages_valid", "Number of valid messages processed"
+)
 messages_invalid = Counter("turbine_messages_invalid", "Number of invalid messages")
 db_inserts = Counter("turbine_db_inserts", "Successful DB inserts")
+
 
 # === Heartbeat Thread ===
 def heartbeat():
     while True:
         logging.info("⏱️ Heartbeat: consumer is alive and waiting for messages...")
         time.sleep(15)  # Feel free to adjust if needed
+
 
 threading.Thread(target=heartbeat, daemon=True).start()
 
@@ -85,10 +91,10 @@ for _ in range(10):
         consumer = KafkaConsumer(
             KAFKA_TOPIC,
             bootstrap_servers=KAFKA_BROKER,
-            value_deserializer=lambda m: json.loads(m.decode('utf-8')),
-            auto_offset_reset='earliest',
+            value_deserializer=lambda m: json.loads(m.decode("utf-8")),
+            auto_offset_reset="earliest",
             enable_auto_commit=True,
-            group_id='wind-consumer-group'
+            group_id="wind-consumer-group",
         )
         logging.info("✅ Kafka Consumer connected.")
         break
@@ -110,7 +116,9 @@ for message in consumer:
 
         messages_processed.inc()
         db_inserts.inc()
-        logging.info(f"[VALID ✅] Stored to DB: {validated.to_dict(orient='records')[0]}")
+        logging.info(
+            f"[VALID ✅] Stored to DB: {validated.to_dict(orient='records')[0]}"
+        )
 
     except pa_errors.SchemaError as e:
         messages_invalid.inc()
