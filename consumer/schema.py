@@ -1,6 +1,6 @@
 import pandera.pandas as pa
 from pandera import Column, DataFrameSchema
-import pandas as pd
+
 
 turbine_schema = DataFrameSchema(
     {
