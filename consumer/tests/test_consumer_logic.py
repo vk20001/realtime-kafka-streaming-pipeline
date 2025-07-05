@@ -19,8 +19,8 @@ def test_validated_df_sent_to_db(monkeypatch):
                 timestamp=pd.to_datetime("2025-07-05T12:00:00"),
                 wind_speed=8.8,
                 pitch_angle=4.5,
-                power_output=500,
-                temperature=55,
+                power_output=500.0,
+                temperature=55.0,
                 vibration=0.2,
             )
         ]
