@@ -2,6 +2,7 @@ from unittest.mock import MagicMock
 import pandas as pd
 import pandera.errors as pa_errors
 from consumer.schema import turbine_schema
+import pytest
 
 
 def test_validated_df_sent_to_db(monkeypatch):
