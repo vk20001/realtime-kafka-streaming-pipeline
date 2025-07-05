@@ -39,6 +39,9 @@ jobs:
           pip install -r consumer/requirements.txt
           pip install pytest flake8
 
+      - name: Set PYTHONPATH for imports
+        run: echo "PYTHONPATH=$GITHUB_WORKSPACE" >> $GITHUB_ENV
+
       - name: Lint with flake8
         run: |
           flake8 consumer/ producer/
