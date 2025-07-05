@@ -8,7 +8,7 @@ def test_schema_accepts_valid_df():
         [
             {
                 "turbine_id": "T-001",
-                "timestamp": "2025-07-05T12:00:00",
+                "timestamp": pd.to_datetime("2025-07-05T12:00:00"),
                 "wind_speed": 12.3,
                 "pitch_angle": 5.2,
                 "power_output": 1000.0,
@@ -26,7 +26,7 @@ def test_schema_rejects_missing_column():
         [
             {
                 "turbine_id": "T-002",
-                "timestamp": "2025-07-05T12:00:00",
+                "timestamp": pd.to_datetime("2025-07-05T12:00:00"),
                 # wind_speed column is missing!
                 "pitch_angle": 5.2,
                 "power_output": 1000.0,

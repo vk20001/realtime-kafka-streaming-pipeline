@@ -16,7 +16,7 @@ def test_validated_df_sent_to_db(monkeypatch):
         [
             dict(
                 turbine_id="T-123",
-                timestamp="2025-07-05T12:00:00",
+                timestamp=pd.to_datetime("2025-07-05T12:00:00"),
                 wind_speed=8.8,
                 pitch_angle=4.5,
                 power_output=500,
