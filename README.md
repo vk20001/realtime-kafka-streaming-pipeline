@@ -52,7 +52,7 @@ CI/CD: GitHub Actions, flake8, pytest
 Clone the repo and launch the entire pipeline:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/realtime-wind-streaming-pipeline.git
+git clone https://github.com/vk20001/realtime-wind-streaming-pipeline.git
 cd realtime-wind-streaming-pipeline
 docker compose up --build
 ```
