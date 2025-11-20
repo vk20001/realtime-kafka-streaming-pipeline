@@ -113,6 +113,4 @@ Master’s in Applied Data Science & Analytics
 Built with love, logic, and a stubborn Kafka broker.  
 GitHub: https://github.com/vk20001
 
-## 🪪 License
 
-This project is licensed under the MIT License. Use it. Learn from it. Make it better.
