@@ -22,7 +22,7 @@ This pipeline simulates a real-world wind turbine monitoring system:
 **Dataset:** 15 simulated wind turbines with 7 sensor metrics per message
 
 ### Real-Time Monitoring Dashboard
-![Grafana Dashboard](evidence/grafana_dashboard.png)
+![Grafana Dashboard](monitoring/grafana/dashboard.png)
 *Live Grafana dashboard tracking message throughput, database inserts, validation results, and system health*
 
 ### Operational Metrics
@@ -39,7 +39,7 @@ This pipeline simulates a real-world wind turbine monitoring system:
 | **Message Distribution** | Balanced across all turbines (~1,080 msgs/turbine) |
 
 ### Database Validation
-![PostgreSQL Data](evidence/postgres_data.png)
+![PostgreSQL Data](postgres_data.png)
 *Wind turbine telemetry successfully persisted with full schema compliance. Data includes wind speed, pitch angle, power output, temperature, and vibration metrics.*
 
 **Sample Record Schema:**
