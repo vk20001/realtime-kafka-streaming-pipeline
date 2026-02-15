@@ -17,7 +17,6 @@ This pipeline simulates a real-world wind turbine monitoring system:
 
 ## 🎯 Production Deployment Evidence
 
-**Deployment Period:** February 2025  
 **Runtime:** 6+ hours continuous operation  
 **Status:** Zero downtime, 100% data validation success  
 **Dataset:** 15 simulated wind turbines with 7 sensor metrics per message
