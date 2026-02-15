@@ -22,7 +22,7 @@ This pipeline simulates a real-world wind turbine monitoring system:
 **Dataset:** 15 simulated wind turbines with 7 sensor metrics per message
 
 ### Real-Time Monitoring Dashboard
-![Grafana Dashboard](monitoring/grafana/dashboard.png)
+![Grafana Dashboard](monitoring/grafana/grafana_dashboard.png)
 *Live Grafana dashboard tracking message throughput, database inserts, validation results, and system health*
 
 ### Operational Metrics
