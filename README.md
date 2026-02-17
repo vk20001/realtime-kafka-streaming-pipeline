@@ -15,7 +15,7 @@ This pipeline simulates a real-world wind turbine monitoring system:
 
 ---
 
-## 🎯 Production Deployment 
+## 🎯 What It Does
 
 **Dataset:** 15 simulated wind turbines with 7 sensor metrics per message
 
@@ -101,31 +101,23 @@ vibration      | FLOAT     | Vibration level (normalized)
 
 This project was built to demonstrate core streaming pipeline patterns in a controlled environment. Here's what I learned and how it would evolve for production:
 
-**What This Project Demonstrates:**
-- Real-time data ingestion with Kafka
-- Schema-based validation using Pandera
-- Metrics collection with Prometheus
-- Dashboard visualization with Grafana
-- Containerized deployment with Docker
-- Automated testing with GitHub Actions
-
-**Production Evolution Path:**
-
-When scaling this to enterprise requirements, key enhancements would include:
-
-**Security:** Implement SSL/TLS encryption, SASL authentication, and topic-level ACLs. Currently uses PLAINTEXT for local development simplicity.
-
-**High Availability:** Deploy multi-broker Kafka cluster (3+ nodes) with replication factor 3. Current single-broker setup is sufficient for prototyping but not fault-tolerant.
-
-**Performance:** Partition topics by turbine_id for parallel processing, enable compression (snappy/lz4), and optimize batch configurations. Current throughput (~30 msg/min) is intentionally throttled for demonstration.
-
-**Operational Resilience:** Add dead letter queues for malformed messages, implement consumer lag monitoring with alerting, and create incident runbooks.
-
-**Why These Aren't Implemented:**  
-This is a learning project focused on demonstrating streaming fundamentals and monitoring patterns. Production hardening features require enterprise infrastructure (multi-node clusters, certificate authorities, secret management) that would obscure the core concepts I'm showcasing here.
-
 ---
 
+## What Production Would Look Like
+
+This pipeline was built to understand core streaming patterns in a controlled environment. Here is what would change at production scale:
+
+**Security:** SSL/TLS encryption, SASL authentication and topic-level ACLs. Currently uses PLAINTEXT for local simplicity.
+
+**High Availability:** Multi-broker cluster (3+ nodes) with replication factor 3. Current single-broker setup is fine for prototyping but is not fault-tolerant.
+
+**Performance:** Topic partitioning by turbine_id for true parallel processing, compression (snappy or lz4), optimised batch sizes. The current 30 msg/min throughput is intentionally throttled to keep the demo readable.
+
+**Operational Resilience:** Dead letter queues for malformed messages, consumer lag monitoring, incident runbooks.
+
+These aren't implemented here because adding enterprise infrastructure would obscure the core patterns the project is built around. The focus was on getting the streaming, validation and observability patterns right first.
+
+---
 ## 🧱 Architecture
 ```
 Producer → Kafka → Consumer → PostgreSQL  
