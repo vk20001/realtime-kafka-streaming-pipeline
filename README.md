@@ -15,10 +15,8 @@ This pipeline simulates a real-world wind turbine monitoring system:
 
 ---
 
-## 🎯 Production Deployment Evidence
+## 🎯 Production Deployment 
 
-**Runtime:** 6+ hours continuous operation  
-**Status:** Zero downtime, 100% data validation success  
 **Dataset:** 15 simulated wind turbines with 7 sensor metrics per message
 
 ### Real-Time Monitoring Dashboard
@@ -35,7 +33,6 @@ This pipeline simulates a real-world wind turbine monitoring system:
 | **Turbines Monitored** | 15 (T-001 to T-015) |
 | **Average Throughput** | ~30 messages/minute |
 | **Data Quality Pass Rate** | 100% (Pandera schema enforcement) |
-| **System Uptime** | 6+ hours continuous |
 | **Message Distribution** | Balanced across all turbines (~1,080 msgs/turbine) |
 
 ### Database Validation
@@ -71,7 +68,7 @@ vibration      | FLOAT     | Vibration level (normalized)
 - ✅ Data type enforcement (FLOAT for metrics, VARCHAR for IDs)
 - ✅ Null value prevention (zero null records in 16,315+ rows)
 
-**Validation Result:** 0 invalid messages over 17,500+ records = **100% data integrity maintained**
+**Validation Result:** 0 invalid messages over 17,500+ records
 
 ### Monitoring Infrastructure
 
@@ -238,9 +235,3 @@ docker-compose.yml     → Service orchestration
 
 ---
 
-## 👩‍💻 Author
-
-**Vaishnavi K.**  
-Master's in Applied Data Science & Analytics  
-Built with love, logic, and a stubborn Kafka broker.  
-GitHub: https://github.com/vk20001
